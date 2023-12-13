@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>events</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+   
+    {% for i in counter %}
+       <center>
+                    {% if forloop.counter0|divisibleby:2 %}
+                <p style="color: cadetblue;">{{i.date}}</p>
+                <h1 style="color: cadetblue;">{{i.name}}</h1>
+                <h4>Total Views: {{i.total_views}}</h4>
+                <a href="{% url 'geocoding' i.id %}"><h5>Geocoding Link</h5></a> 
+
+                <a href="{% url 'my_distance_view' %}"><h5>calculate Distance</h5></a>
+           
+            {% else %}
+                <p style="color: rgb(0, 81, 255);">{{i.date}}</p>
+                <h1 style="color: rgb(0, 81, 255);">{{i.name}}</h1>
+               <h4>Total Views: {{i.total_views}}</h4>
+               <a href="{% url 'geocoding' i.id %}"><h5>Geocoding Link</h5></a> 
+               <a href="{% url 'my_distance_view' %}"><h5>calculate Distance</h5></a>
+               
+            {% endif %}
+            <form action="{% url 'detail' pk=i.id %}" method="get">
+                <input type="hidden" name="post-id" value="{{i.id}}">
+                <button type="submit" class="btn btn-primary">Read More</button>
+            </form>    
+            <hr>
+       </center>
+    {% endfor %}
+</body>
+</html>
